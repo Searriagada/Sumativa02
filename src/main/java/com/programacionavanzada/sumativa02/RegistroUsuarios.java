@@ -12,9 +12,9 @@ public class RegistroUsuarios {
     
     // CUSTOMERS
     // Metodo buscar
-    public boolean buscar (String numeroRut) {
+    public boolean buscar (int numeroRut) {
         for (Usuario i : listaUsuarios) {
-            if(numeroRut.equalsIgnoreCase(i.getNumeroRut())) {
+            if(numeroRut == i.getNumeroRut()) {
                 return true; 
             }
         }
@@ -40,9 +40,9 @@ public class RegistroUsuarios {
     }
     
     // Método eliminar 
-    public boolean eliminar (String numeroRut) {
+    public boolean eliminar (int numeroRut) {
         for (Usuario i : listaUsuarios) {
-            if (numeroRut.equalsIgnoreCase(i.getNumeroRut())){
+            if (numeroRut == i.getNumeroRut()){
                 listaUsuarios.remove(i);
                 return true;
             }

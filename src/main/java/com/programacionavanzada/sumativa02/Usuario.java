@@ -2,29 +2,41 @@
 package com.programacionavanzada.sumativa02;
 
 public class Usuario {
-    protected String nombreCompleto; 
-    protected String numeroRut; ; 
+    protected String nombre;
+    protected String apellido;
+    protected int numeroRut;
+    protected char dv;
     protected String genero; 
     protected boolean prestamo; 
 
     public Usuario() {
     }
 
-    public Usuario(String nombreCompleto, String numeroRut, String genero, boolean prestamo) {
-        this.nombreCompleto = nombreCompleto;
-        this.numeroRut = numeroRut;
-        this.genero = genero;
+    public Usuario(String nombre, String apellido, int numeroRut, char dv, String genero, boolean prestamo) {
+        this.setNombre(nombre);
+        this.setApellido(apellido); 
+        this.setNumeroRut(numeroRut);
+        this.setDv(dv);
+        this.setGenero(genero);
         this.prestamo = prestamo;
     }
 
     // GETTER
 
-    public String getNombreCompleto() {
-        return nombreCompleto;
+    public String getNombre() {
+        return nombre;
     }
 
-    public String getNumeroRut() {
+    public String getApellido() {
+        return apellido;
+    }
+    
+    public int getNumeroRut() {
         return numeroRut;
+    }
+
+    public char getDv() {
+        return dv;
     }
 
     public String getGenero() {
@@ -37,32 +49,81 @@ public class Usuario {
     
     // SETTER
 
-    public void setNombreCompleto(String nombreCompleto) {
-        this.nombreCompleto = nombreCompleto;
-    }
-
-    public void setNumeroRut(String numeroRut) {
-        this.numeroRut = numeroRut;
-    }
-
-    public void setGenero(String genero) {
-        if(genero.equalsIgnoreCase("M") || genero.equalsIgnoreCase("F")) {
-            this.genero = genero;
+    //Validación de Nombre
+    public void setNombre(String nombre) {
+        if(nombre == null) {
+            System.out.println("Debe ingresar un nombre");
         }
         else {
-            System.out.println("Error: Debe ingresar F para femenino y M para masculino. ");
+                if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
+                    throw new IllegalArgumentException("El nombre solo puede contener letras");
+
+                }
+                else {
+                    this.nombre = nombre;
+                }
+        }
+    }
+    
+    // Validación Apellido
+    public void setApellido(String apellido) {
+        if(apellido == null) {
+            System.out.println("Debe ingresar un apellido");
+        }
+        else {
+                if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
+                    throw new IllegalArgumentException("El apellido solo puede contener letras");
+
+                }
+                else {
+                    this.apellido = apellido;
+                }
         }
         
     }
 
+    // Validación rut
+    public void setNumeroRut(int numeroRut) {
+        if(numeroRut<1000000 || numeroRut>99999999){
+            throw new IllegalArgumentException("El número de RUT debe tener entre 7 y 8 dígitos, y sin puntos ni guón.");
+        }
+        else{
+             this.numeroRut = numeroRut;
+        }
+    }
+
+    // Validación digito verificador
+    public void setDv(char dv) {
+        dv = Character.toUpperCase(dv);
+        if (!Character.isDigit(dv) && dv != 'K') {
+            throw new IllegalArgumentException("El dígito verificador debe ser un número o letra K.");
+        }
+        else{
+            this.dv = dv;
+        }
+    }
+
+    // Validación de género
+    public void setGenero(String genero) {
+        if(genero.equalsIgnoreCase("F") || genero.equalsIgnoreCase("M")) {
+            this.genero = genero;
+        }
+        else {
+            System.out.println("Error: Debe declarar el genero como F para femenino y M para masculino");
+        }
+        
+    }
+
+    // FALTA VALIDAR EL PRESTAMO. 
     public void setPrestamo(boolean prestamo) {
         this.prestamo = prestamo;
     }
 
     @Override
     public String toString() {
-        return "Usuario{" + "nombreCompleto=" + nombreCompleto + ", numeroRut=" + numeroRut + ", genero=" + genero + ", prestamo=" + prestamo + '}';
+        return "Usuario{" + "nombre=" + nombre + ", apellido=" + apellido + ", numeroRut=" + numeroRut + ", dv=" + dv + ", genero=" + genero + ", prestamo=" + prestamo + '}';
     }
     
-    
+
+
 }
