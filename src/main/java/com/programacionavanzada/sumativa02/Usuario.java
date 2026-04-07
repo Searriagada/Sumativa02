@@ -3,33 +3,28 @@ package com.programacionavanzada.sumativa02;
 
 public class Usuario {
     protected String nombreCompleto; 
-    protected int numeroRut; 
-    protected char dv; 
+    protected String numeroRut; ; 
     protected String genero; 
     protected boolean prestamo; 
 
     public Usuario() {
     }
 
-    public Usuario(String nombreCompleto, int numeroRut, char dv, String genero, boolean prestamo) {
+    public Usuario(String nombreCompleto, String numeroRut, String genero, boolean prestamo) {
         this.nombreCompleto = nombreCompleto;
         this.numeroRut = numeroRut;
-        this.dv = dv;
         this.genero = genero;
         this.prestamo = prestamo;
     }
 
     // GETTER
+
     public String getNombreCompleto() {
         return nombreCompleto;
     }
 
-    public int getNumeroRut() {
+    public String getNumeroRut() {
         return numeroRut;
-    }
-
-    public char getDv() {
-        return dv;
     }
 
     public String getGenero() {
@@ -39,23 +34,25 @@ public class Usuario {
     public boolean isPrestamo() {
         return prestamo;
     }
-
+    
     // SETTER
 
     public void setNombreCompleto(String nombreCompleto) {
         this.nombreCompleto = nombreCompleto;
     }
 
-    public void setNumeroRut(int numeroRut) {
+    public void setNumeroRut(String numeroRut) {
         this.numeroRut = numeroRut;
     }
 
-    public void setDv(char dv) {
-        this.dv = dv;
-    }
-
     public void setGenero(String genero) {
-        this.genero = genero;
+        if(genero.equalsIgnoreCase("M") || genero.equalsIgnoreCase("F")) {
+            this.genero = genero;
+        }
+        else {
+            System.out.println("Error: Debe ingresar F para femenino y M para masculino. ");
+        }
+        
     }
 
     public void setPrestamo(boolean prestamo) {
@@ -64,11 +61,8 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "nombreCompleto=" + nombreCompleto + ", numeroRut=" + numeroRut + ", dv=" + dv + ", genero=" + genero + ", prestamo=" + prestamo + '}';
+        return "Usuario{" + "nombreCompleto=" + nombreCompleto + ", numeroRut=" + numeroRut + ", genero=" + genero + ", prestamo=" + prestamo + '}';
     }
-    
-    
-   
     
     
 }
