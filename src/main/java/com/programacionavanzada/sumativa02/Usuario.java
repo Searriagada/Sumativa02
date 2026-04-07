@@ -2,11 +2,11 @@
 package com.programacionavanzada.sumativa02;
 
 public class Usuario {
-    private String nombreCompleto; 
-    private int numeroRut; 
-    private char dv; 
-    private String genero; 
-    private boolean prestamo; 
+    protected String nombreCompleto; 
+    protected int numeroRut; 
+    protected char dv; 
+    protected String genero; 
+    protected boolean prestamo; 
 
     public Usuario() {
     }
@@ -18,9 +18,8 @@ public class Usuario {
         this.genero = genero;
         this.prestamo = prestamo;
     }
-    
-    // GETTER
 
+    // GETTER
     public String getNombreCompleto() {
         return nombreCompleto;
     }
@@ -40,7 +39,7 @@ public class Usuario {
     public boolean isPrestamo() {
         return prestamo;
     }
-    
+
     // SETTER
 
     public void setNombreCompleto(String nombreCompleto) {
@@ -67,6 +66,9 @@ public class Usuario {
     public String toString() {
         return "Usuario{" + "nombreCompleto=" + nombreCompleto + ", numeroRut=" + numeroRut + ", dv=" + dv + ", genero=" + genero + ", prestamo=" + prestamo + '}';
     }
+    
+    
+   
     
     
 }
