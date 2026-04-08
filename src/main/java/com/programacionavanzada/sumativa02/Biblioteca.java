@@ -36,4 +36,21 @@ public class Biblioteca {
         return false;
     }
     
+    public boolean buscarLibro(String isbn){
+        for(Libro i : listaLibros){
+            if(isbn.equals(i.getIsbn())){
+                return true;
+            }
+        }
+        return false;
+    } 
+    
+    public int consultarStock(String isbn){
+        for(Libro i : listaLibros){
+            if(isbn.equals(i.getIsbn())){
+                return i.getStockDisponible();
+            }
+        }
+        return -1;
+    }
 }
