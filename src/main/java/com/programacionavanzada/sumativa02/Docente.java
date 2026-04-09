@@ -32,6 +32,10 @@ public class Docente extends Usuario {
     
     // SETTER
 
+    /**
+     * Validación de que profesión se escriba segun un formato y no quede vacío
+     * @param profesion 
+     */
     public void setProfesion(String profesion) {
         if (profesion == null || profesion.trim().isEmpty()){
             System.out.println("Error, el campo profesión no puede quedar vacío");
@@ -46,13 +50,24 @@ public class Docente extends Usuario {
         }
     }
 
+    /**
+     * Validación de grado para Docentes, en el cual solo puede como grados Magíster o Doctor
+     * @param grado 
+     */
     public void setGrado(String grado) {
-        if(grado.equalsIgnoreCase("Magister") || grado.equalsIgnoreCase("Doctor")) {
-            this.grado = grado;
+        if (grado == null || grado.trim().isEmpty()){
+            System.out.println("Error, el campo grado no puede estar vacío");
         }
         else {
-            System.out.println("Error, debe ingresar un grado válido. Magíster o Doctor");
+            if(grado.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
+                System.out.println("Error, no debe usar caracteres especiales y usar espacios");
+            }
+            else{
+                if(grado.equalsIgnoreCase("Magister") || grado.equalsIgnoreCase("Doctor")) {
+                    this.grado = grado.toUpperCase();
+            }
         }
+      }
     }
 
     @Override

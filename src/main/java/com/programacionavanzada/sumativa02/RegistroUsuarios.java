@@ -16,13 +16,13 @@ public class RegistroUsuarios {
     * si encuentra al usuario en la lista retorna true.
     * si no encuentra al usuario retorna false.
     */
-    public boolean buscar (int numeroRut) {
+    public Usuario buscar (int numeroRut) {
         for (Usuario i : listaUsuarios) {
             if(numeroRut == i.getNumeroRut()) {
-                return true; 
+                return i; 
             }
         }
-        return false; 
+        return null; 
     }
     
 
@@ -65,8 +65,5 @@ public class RegistroUsuarios {
         }
         return false; 
     }
-
-    
-    
     
 }
