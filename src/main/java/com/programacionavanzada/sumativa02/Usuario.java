@@ -7,18 +7,18 @@ public class Usuario {
     protected int numeroRut;
     protected char dv;
     protected String genero; 
-    protected boolean prestamo; 
+    protected String prestamo; 
 
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, int numeroRut, char dv, String genero, boolean prestamo) {
+    public Usuario(String nombre, String apellido, int numeroRut, char dv, String genero, String prestamo) {
         this.setNombre(nombre);
         this.setApellido(apellido); 
         this.setNumeroRut(numeroRut);
         this.setDv(dv);
         this.setGenero(genero);
-        this.prestamo = prestamo;
+        this.setPrestamo(prestamo);
     }
 
     // GETTER
@@ -43,7 +43,7 @@ public class Usuario {
         return genero;
     }
 
-    public boolean isPrestamo() {
+    public String isPrestamo() {
         return prestamo;
     }
     
@@ -115,8 +115,18 @@ public class Usuario {
     }
 
     // FALTA VALIDAR EL PRESTAMO. 
-    public void setPrestamo(boolean prestamo) {
-        this.prestamo = prestamo;
+    public void setPrestamo(String prestamo) {
+        if(prestamo == null || prestamo.trim().isEmpty()){
+            System.out.println("Error, la condición de prestamo no puede estar vacía");
+        }
+        else{
+            if(prestamo.equals("0") || prestamo.matches("[0-9\\-]+")){
+                this.prestamo = prestamo;
+            }
+            else{
+                System.out.println("Debe ingresar 0 o un ISBN válido");
+            }
+        }
     }
 
     @Override

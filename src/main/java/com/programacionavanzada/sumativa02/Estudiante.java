@@ -12,7 +12,7 @@ public class Estudiante extends Usuario {
         this.carrera = carrera;
     }
 
-    public Estudiante(String carrera, String nombre, String apellido, int numeroRut, char dv, String genero, boolean prestamo) {
+    public Estudiante(String carrera, String nombre, String apellido, int numeroRut, char dv, String genero, String prestamo) {
         super(nombre, apellido, numeroRut, dv, genero, prestamo);
         this.carrera = carrera;
     }

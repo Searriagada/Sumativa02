@@ -13,7 +13,7 @@ public class Docente extends Usuario {
         this.grado = grado;
     }
 
-    public Docente(String profesion, String grado, String nombre, String apellido, int numeroRut, char dv, String genero, boolean prestamo) {
+    public Docente(String profesion, String grado, String nombre, String apellido, int numeroRut, char dv, String genero, String prestamo) {
         super(nombre, apellido, numeroRut, dv, genero, prestamo);
         this.profesion = profesion;
         this.grado = grado;
