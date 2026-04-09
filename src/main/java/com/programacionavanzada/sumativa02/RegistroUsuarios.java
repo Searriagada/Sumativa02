@@ -25,7 +25,6 @@ public class RegistroUsuarios {
         return null; 
     }
     
-
     /** 
      * Metodo agregar usuario a la lista
      * la busqueda se realiza mediante el rut del objeto usuario
