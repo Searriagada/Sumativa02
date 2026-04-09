@@ -9,7 +9,7 @@ public class Estudiante extends Usuario {
     }
 
     public Estudiante(String carrera) {
-        this.carrera = carrera;
+        this.setCarrera(carrera);
     }
 
     public Estudiante(String carrera, String nombre, String apellido, int numeroRut, char dv, String genero, String prestamo) {
@@ -28,7 +28,17 @@ public class Estudiante extends Usuario {
     // SETTER
 
     public void setCarrera(String carrera) {
-        this.carrera = carrera;
+        if(carrera == null || carrera.trim().isEmpty()){
+            System.out.println("Error, debe ingresar una carrera válida");
+        }
+        else{
+            if(carrera.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")){
+                System.out.println("Error, el nombre de la carrera de contener letras y espacios");
+            }
+            else{
+                this.carrera = carrera.toUpperCase();
+            }
+        }
     }
 
     @Override
