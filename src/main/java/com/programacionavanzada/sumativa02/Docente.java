@@ -9,8 +9,8 @@ public class Docente extends Usuario {
     }
 
     public Docente(String profesion, String grado) {
-        this.profesion = profesion;
-        this.grado = grado;
+        this.setProfesion(profesion);
+        this.setGrado(grado);
     }
 
     public Docente(String profesion, String grado, String nombre, String apellido, int numeroRut, char dv, String genero, String prestamo) {
@@ -33,11 +33,26 @@ public class Docente extends Usuario {
     // SETTER
 
     public void setProfesion(String profesion) {
-        this.profesion = profesion;
+        if (profesion == null || profesion.trim().isEmpty()){
+            System.out.println("Error, el campo profesión no puede quedar vacío");
+        }
+        else{
+            if(profesion.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")){
+                System.out.println("Error, solo puede utilizar letras y espacios");
+            }
+            else{
+                this.profesion = profesion.toUpperCase();
+            }
+        }
     }
 
     public void setGrado(String grado) {
-        this.grado = grado;
+        if(grado.equalsIgnoreCase("Magister") || grado.equalsIgnoreCase("Doctor")) {
+            this.grado = grado;
+        }
+        else {
+            System.out.println("Error, debe ingresar un grado válido. Magíster o Doctor");
+        }
     }
 
     @Override

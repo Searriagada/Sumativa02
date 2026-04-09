@@ -10,8 +10,12 @@ public class RegistroUsuarios {
         this.listaUsuarios = new ArrayList<>(); 
     }
     
-    // CUSTOMERS
-    // Metodo buscar
+
+    /**
+    * método buscar usuario. 
+    * si encuentra al usuario en la lista retorna true.
+    * si no encuentra al usuario retorna false.
+    */
     public boolean buscar (int numeroRut) {
         for (Usuario i : listaUsuarios) {
             if(numeroRut == i.getNumeroRut()) {
@@ -21,7 +25,14 @@ public class RegistroUsuarios {
         return false; 
     }
     
-    // Método agregar 
+
+    /** 
+     * Metodo agregar usuario a la lista
+     * la busqueda se realiza mediante el rut del usuario
+     * primero busca que el usuario no exista, si el usuario existe, no lo agrega a la lista
+     * si el usuario no existe lo agrega a la lista
+     * @param usuario que será agregado a la lista
+     */
     public void agregar (Usuario usuario) {
             if (buscar(usuario.getNumeroRut())) {
                 System.out.println("Usuario ya registrado");
@@ -39,7 +50,12 @@ public class RegistroUsuarios {
         }
     }
     
-    // Método eliminar 
+
+    /**
+     * método para eliminar un usuario, valida que el numeroRut exista antes de eliminar el objeto
+     * @param numeroRut que será eliminado
+     * @return true si el usuario existe y fue removido, false si el usuario no existe
+     */
     public boolean eliminar (int numeroRut) {
         for (Usuario i : listaUsuarios) {
             if (numeroRut == i.getNumeroRut()){
