@@ -13,8 +13,8 @@ public class RegistroUsuarios {
 
     /**
     * método buscar usuario. 
-    * si encuentra al usuario en la lista retorna true.
-    * si no encuentra al usuario retorna false.
+    * si encuentra al usuario en la lista retorna un objeto usuario.
+    * si no encuentra al usuario retorna null.
     */
     public Usuario buscar (int numeroRut) {
         for (Usuario i : listaUsuarios) {
@@ -28,13 +28,13 @@ public class RegistroUsuarios {
 
     /** 
      * Metodo agregar usuario a la lista
-     * la busqueda se realiza mediante el rut del usuario
-     * primero busca que el usuario no exista, si el usuario existe, no lo agrega a la lista
+     * la busqueda se realiza mediante el rut del objeto usuario
+     * primero busca que el usuario exista, si el usuario existe, no lo agrega a la lista
      * si el usuario no existe lo agrega a la lista
      * @param usuario que será agregado a la lista
      */
     public void agregar (Usuario usuario) {
-            if (buscar(usuario.getNumeroRut())) {
+            if (buscar(usuario.getNumeroRut()) != null) {
                 System.out.println("Usuario ya registrado");
             }
             else{
