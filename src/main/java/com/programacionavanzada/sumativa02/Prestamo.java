@@ -1,6 +1,6 @@
 package com.programacionavanzada.sumativa02;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -8,68 +8,70 @@ import java.util.Date;
  */
 public class Prestamo {
     
-    private String isbn;
-    private int numeroRut;
-    private Biblioteca biblioteca;
-    private RegistroUsuarios listaUsuarios;
-    private Date fechaPrestamo;
-    private Date fechaDevolucion;
+    private Libro libro;
+    private Usuario usuario;
+    private LocalDate fechaPrestamo;
+    private LocalDate fechaDevolucion;
 
     public Prestamo() {
     }
 
-    public Prestamo(String isbn, int numeroRut, Date fechaPrestamo, Date fechaDevolucion, Biblioteca biblioteca, RegistroUsuarios listaUsuarios) {
-        setIsbn(isbn);
-        this.numeroRut = numeroRut;
+    public Prestamo(String isbn, int numeroRut, LocalDate fechaPrestamo, LocalDate fechaDevolucion, Biblioteca biblioteca, RegistroUsuarios listaUsuarios) {
+        
+        Libro libro = biblioteca.buscarLibro(isbn);
+        if(libro == null){
+            throw new IllegalArgumentException("El libro no existe");
+        }
+        Usuario usuario = listaUsuarios.buscar(numeroRut);
+        if(usuario == null){
+            throw new IllegalArgumentException("el usuario no existe");
+        }
+
+        setLibro(libro);
+        setUsuario(usuario);
         this.fechaPrestamo = fechaPrestamo;
         this.fechaDevolucion = fechaDevolucion;
-        this.biblioteca = biblioteca;
-        this.listaUsuarios = listaUsuarios;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public Libro getLibro() {
+        return libro;
     }
 
-    public int getNumeroRut() {
-        return numeroRut;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public Date getFechaPrestamo() {
+    public LocalDate getFechaPrestamo() {
         return fechaPrestamo;
     }
 
-    public Date getFechaDevolucion() {
+    public LocalDate getFechaDevolucion() {
         return fechaDevolucion;
     }
 
-    public void setIsbn(String isbn) {
-        if(isbn == null || isbn.isBlank()){
-            throw new IllegalArgumentException("El isbn es requerido");
+    public void setLibro(Libro libro) {
+        if(libro.getStockDisponible() <=0){
+            throw new IllegalArgumentException("Sin stock disponible");
         }
-        if(!biblioteca.buscarLibro(isbn)){
-            throw new IllegalArgumentException("El isbn consultado no existe");
-        }
-        if(biblioteca.consultarStock(isbn) <= 0){
-            throw new IllegalArgumentException("Stock insuficiente");
-        }
-        this.isbn = isbn;
+        this.libro = libro;
     }
 
-    public void setNumeroRut(int numeroRut) {
-        if(!listaUsuarios.buscar(numeroRut)){
-            throw new IllegalArgumentException("El rut consultado no existe");
+    public void setUsuario(Usuario usuario) {
+        if(usuario.isPrestamo().equals("0")){
+            this.usuario = usuario;
+        }else{
+           throw new IllegalArgumentException("El usuario cuenta con el siguiente prestamo activo: "+usuario.isPrestamo());
         }
-        this.numeroRut = numeroRut;
     }
 
-    public void setFechaPrestamo(Date fechaPrestamo) {
+    public void setFechaPrestamo(LocalDate fechaPrestamo) {
         this.fechaPrestamo = fechaPrestamo;
     }
 
-    public void setFechaDevolucion(Date fechaDevolucion) {
+    public void setFechaDevolucion(LocalDate fechaDevolucion) {
         this.fechaDevolucion = fechaDevolucion;
     }
-    
+
+  
     
 }

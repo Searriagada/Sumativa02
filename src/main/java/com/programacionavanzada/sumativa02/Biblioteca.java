@@ -20,6 +20,16 @@ public class Biblioteca {
         listaLibros.add(libro);
         return true;
     }
+    
+    public Libro buscarLibro(String isbn){
+        for(Libro i : listaLibros){
+            if(isbn.equals(i.getIsbn())){
+                return i;
+            }
+        }
+        return null;
+    } 
+
     /**
      * método para eliminar un libro, valida que el isbn exista antes de eliminar el objeto
      * @param isbn del libro a eliminar
@@ -34,23 +44,5 @@ public class Biblioteca {
         }
         System.out.println("El isbn no existe");
         return false;
-    }
-    
-    public boolean buscarLibro(String isbn){
-        for(Libro i : listaLibros){
-            if(isbn.equals(i.getIsbn())){
-                return true;
-            }
-        }
-        return false;
-    } 
-    
-    public int consultarStock(String isbn){
-        for(Libro i : listaLibros){
-            if(isbn.equals(i.getIsbn())){
-                return i.getStockDisponible();
-            }
-        }
-        return -1;
     }
 }
