@@ -101,7 +101,6 @@ public class Usuario {
         else {
             System.out.println("Error: Debe declarar el genero como F para femenino y M para masculino");
         }
-        
     }
 
     // FALTA VALIDAR EL PRESTAMO. 

@@ -42,16 +42,12 @@ public class Docente extends Usuario {
      */
     public void setProfesion(String profesion) {
         if (profesion == null || profesion.trim().isEmpty()){
-            System.out.println("Error, el campo profesión no puede quedar vacío");
+            throw new IllegalArgumentException("Error, el campo profesión no puede quedar vacío");
         }
-        else{
-            if(profesion.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")){
-                System.out.println("Error, solo puede utilizar letras y espacios");
-            }
-            else{
-                this.profesion = profesion.toUpperCase();
-            }
+        if(profesion.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")){
+                throw new IllegalArgumentException("Error, solo puede utilizar letras y espacios");   
         }
+        this.profesion = profesion.toUpperCase();
     }
 
     /**
@@ -60,17 +56,15 @@ public class Docente extends Usuario {
      */
     public void setGrado(String grado) {
         if (grado == null || grado.trim().isEmpty()){
-            System.out.println("Error, el campo grado no puede estar vacío");
+            throw new IllegalArgumentException("Error, el campo grado no puede estar vacío");
         }
-        else {
-            if(grado.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
-                System.out.println("Error, no debe usar caracteres especiales y usar espacios");
-            }
-            else{
-                if(grado.equalsIgnoreCase("Magister") || grado.equalsIgnoreCase("Doctor")) {
-                    this.grado = grado.toUpperCase();
-            }
+        
+        if(grado.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
+             throw new IllegalArgumentException("Error, no debe usar caracteres especiales y usar espacios");
         }
+        
+        if(grado.equalsIgnoreCase("Magister") || grado.equalsIgnoreCase("Doctor")) {
+             this.grado = grado.toUpperCase();
       }
     }
 
