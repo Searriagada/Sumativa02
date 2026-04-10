@@ -33,16 +33,12 @@ public class Estudiante extends Usuario {
 
     public void setCarrera(String carrera) {
         if(carrera == null || carrera.trim().isEmpty()){
-            System.out.println("Error, debe ingresar una carrera válida");
+            throw new IllegalArgumentException("Error, debe ingresar una carrera válida");
         }
-        else{
-            if(carrera.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")){
-                System.out.println("Error, el nombre de la carrera de contener letras y espacios");
-            }
-            else{
-                this.carrera = carrera.toUpperCase();
-            }
+        if(carrera.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")){
+                throw new IllegalArgumentException("Error, el nombre de la carrera de contener letras y espacios");
         }
+        this.carrera = carrera.toUpperCase();
     }
 
     @Override
