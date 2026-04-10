@@ -55,35 +55,25 @@ public class Usuario {
 
     //Validación de Nombre
     public void setNombre(String nombre) {
-        if(nombre == null) {
-            System.out.println("Debe ingresar un nombre");
+        if(nombre == null || nombre.trim().isEmpty()) {
+             throw new IllegalArgumentException("Debe ingresar un nombre");
         }
-        else {
-                if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
-                    throw new IllegalArgumentException("El nombre solo puede contener letras");
-
-                }
-                else {
-                    this.nombre = nombre;
-                }
+        if (!nombre.trim().matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
+             throw new IllegalArgumentException("El nombre solo puede contener letras");
         }
+        this.nombre = nombre;
     }
     
     // Validación Apellido
     public void setApellido(String apellido) {
-        if(apellido == null) {
-            System.out.println("Debe ingresar un apellido");
+        if(apellido == null || apellido.trim().isEmpty()) {
+            throw new IllegalArgumentException("Debe ingresar un apellido");
         }
-        else {
-                if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
-                    throw new IllegalArgumentException("El apellido solo puede contener letras");
-
-                }
-                else {
-                    this.apellido = apellido;
-                }
+        if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
+             throw new IllegalArgumentException("El apellido solo puede contener letras");
+             
         }
-        
+        this.apellido = apellido;
     }
 
     // Validación rut
@@ -91,9 +81,7 @@ public class Usuario {
         if(numeroRut<1000000 || numeroRut>99999999){
             throw new IllegalArgumentException("El número de RUT debe tener entre 7 y 8 dígitos, y sin puntos ni guón.");
         }
-        else{
-             this.numeroRut = numeroRut;
-        }
+        this.numeroRut = numeroRut;
     }
 
     // Validación digito verificador
@@ -101,10 +89,8 @@ public class Usuario {
         dv = Character.toUpperCase(dv);
         if (!Character.isDigit(dv) && dv != 'K') {
             throw new IllegalArgumentException("El dígito verificador debe ser un número o letra K.");
-        }
-        else{
-            this.dv = dv;
-        }
+        } 
+        this.dv = dv;
     }
 
     // Validación de género
