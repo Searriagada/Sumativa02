@@ -47,6 +47,10 @@ public class Usuario {
         return prestamo;
     }
     
+    public int getMaxDiasPrestamo(){
+        return 10;
+    }
+    
     // SETTER
 
     //Validación de Nombre

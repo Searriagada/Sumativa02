@@ -30,6 +30,10 @@ public class Docente extends Usuario {
         return grado;
     }
     
+    public int getMaxDiasPrestamo(){
+        return 20;
+    }
+    
     // SETTER
 
     /**

@@ -25,6 +25,10 @@ public class Estudiante extends Usuario {
         return carrera;
     }
     
+    public int getMaxDiasPrestamo(){
+        return 10;
+    }
+    
     // SETTER
 
     public void setCarrera(String carrera) {
