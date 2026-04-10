@@ -4,54 +4,71 @@ package com.programacionavanzada.sumativa02;
 public class Sumativa02 {
 
     public static void main(String[] args) {
-        
-       Biblioteca registroLibro = new Biblioteca();
-       RegistroUsuarios usuarios = new RegistroUsuarios();
-       RegistroPrestamos prestamo1 = new RegistroPrestamos();
-       
-        
-      /* Estudiante estudiante1 = new Estudiante("Ingeniria Civil Informática", "Albert", "Einstein", 16875655, '0', "M");
-       Docente docente1 = new Docente ("Ingenieria Civil Industrial", "magister", "Julio", "Cortazar", 27699943, '5', "m");
-       usuarios.agregar(docente1);
-       usuarios.agregar(estudiante1);
-        System.out.println("--------------------------");
-       usuarios.mostrar(); 
-        System.out.println("------------------------");
-        usuarios.eliminar(16875650); 
-        System.out.println("------------------------");
-        usuarios.mostrar();
-        System.out.println("-----------------------------");
-        Docente docente2 = new Docente ("Ingenieria Civil Industrial", "magister", "Pepe", "Cortazar", 8507450, '4', "m");
-        usuarios.agregar(docente2);
-        System.out.println("-----------------");
-        */
-      
-        Libro libro1 = new Libro("abc123", "Juego de tronos", "George Martin", 1, 1, "http://sample.png");
-        registroLibro.agregarLibro(libro1);
-        
-        Libro libro2 = new Libro("abc123", "Choque de Reyes", "George Martin", 1, 1, "http://sample.png");
-        registroLibro.agregarLibro(libro2);
-        
-        Libro libro3 = new Libro("abc125", "Tormenta de Espadas", "George Martin", 1, 1, "http://sample.png");
-        registroLibro.agregarLibro(libro3);
-        
-        Libro libro4 = new Libro("abc126", "Festin de cuervos", "George Martin", 1, 1, "http://sample.png");
-        registroLibro.agregarLibro(libro4);
+        Biblioteca biblioteca = new Biblioteca();
+        RegistroUsuarios registroUsuarios = new RegistroUsuarios();
 
-        registroLibro.mostrar(); 
-        
-        System.out.println("----------------------------");
-        registroLibro.eliminarLibro("abc123");
-        registroLibro.mostrar();
-        
-        
-        
-      
+        Libro libro1 = new Libro(
+                "978-956-123456-7",
+                "Clean Code",
+                "Robert C. Martin",
+                5,
+                5,
+                "https://example.com/clean-code.jpg"
+        );
+        Libro libro2 = new Libro(
+                "978-84-376-0494-7",
+                "Don Quijote de la Mancha",
+                "Miguel de Cervantes",
+                3,
+                3,
+                ""
+        );
 
-        
-        
-        
-       
-        
+        biblioteca.agregarLibro(libro1);
+        biblioteca.agregarLibro(libro2);
+
+        Usuario estudiante = new Estudiante(
+                "Ingenieria en Informatica",
+                "Francisco",
+                "Perez",
+                12345678,
+                '5',
+                "M",
+                "0"
+        );
+        Usuario docente = new Docente(
+                "Ingeniero Civil Informatico",
+                "Magister",
+                "Ana",
+                "Gonzalez",
+                23456789,
+                'K',
+                "F",
+                "0"
+        );
+
+        registroUsuarios.agregar(estudiante);
+        registroUsuarios.agregar(docente);
+
+        System.out.println("=== LIBRO REGISTRADO ===");
+        System.out.println("Titulo: " + libro1.getTitulo());
+        System.out.println("ISBN: " + libro1.getIsbn());
+        System.out.println("Stock disponible: " + libro1.getStockDisponible());
+
+        System.out.println("\n=== USUARIOS REGISTRADOS ===");
+        registroUsuarios.mostrar();
+
+        System.out.println("\n=== PRESTAMO DE PRUEBA ===");
+        Prestamo prestamo = new Prestamo(
+                libro1.getIsbn(),
+                estudiante.getNumeroRut(),
+                7,
+                biblioteca,
+                registroUsuarios
+        );
+        prestamo.generarPrestamo();
+
+        System.out.println("\nEstado del usuario despues del prestamo: " + estudiante.Prestamo());
+        System.out.println("Stock en biblioteca despues del prestamo: " + libro1.getStockBiblioteca());
     }
 }

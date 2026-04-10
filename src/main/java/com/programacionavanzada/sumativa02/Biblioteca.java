@@ -1,5 +1,6 @@
 package com.programacionavanzada.sumativa02;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Biblioteca {
     
@@ -29,7 +30,7 @@ public class Biblioteca {
      * @param isbn
      * @return objeto libro
      */
-    
+
     public Libro buscarLibro(String isbn){
         for(Libro i : listaLibros){
             if(isbn.equals(i.getIsbn())){
@@ -38,7 +39,7 @@ public class Biblioteca {
         }
         return null;
     } 
-    
+
         public void mostrar (){
         for (Libro i : listaLibros) {
             System.out.println(i);
@@ -65,8 +66,10 @@ public class Biblioteca {
     public String toString() {
         return "Biblioteca{" + "listaLibros=" + listaLibros + '}';
     }
-    
-    
+
+
+
+    public List<Libro> listarLibros() {
+        return new ArrayList<>(listaLibros);
+    }
 }
-
-

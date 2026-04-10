@@ -1,6 +1,7 @@
 package com.programacionavanzada.sumativa02;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 /**
  *
@@ -12,7 +13,10 @@ public class Prestamo {
     private Usuario usuario;
     private LocalDate fechaPrestamo;
     private LocalDate fechaDevolucion;
+    private LocalDate fechaDevolucionReal;
     private int diasPrestamo;
+    private boolean activo;
+    private int multa;
 
     public Prestamo() {
     }
@@ -33,6 +37,7 @@ public class Prestamo {
         setDiasPrestamo(diasPrestamo);
         this.fechaPrestamo = LocalDate.now();
         this.fechaDevolucion = fechaPrestamo.plusDays(diasPrestamo);
+        this.activo = true;
     }
     
     // GETTER
@@ -56,11 +61,23 @@ public class Prestamo {
     public int getDiasPrestamo() {
         return diasPrestamo;
     }
-    
+
+    public LocalDate getFechaDevolucionReal() {
+        return fechaDevolucionReal;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public int getMulta() {
+        return multa;
+    }
+
     // SETTER
 
     public void setLibro(Libro libro) {
-        if(libro.getStockDisponible() <=0){
+        if(libro == null || libro.getStockDisponible() <=0){
             throw new IllegalArgumentException("Sin stock disponible");
         }
         this.libro = libro;
@@ -95,7 +112,7 @@ public class Prestamo {
      * Añade el libro en préstamo al usuario
      * Agrega el préstamo al ArrayList
      * genera ticket de préstamo
-     * @param registro 
+     * @param registro
      */
     public void generarPrestamo(RegistroPrestamos registro){
         libro.actualizarStockDisponible();
@@ -103,7 +120,23 @@ public class Prestamo {
         registro.agregarPrestamo(this);
         imprimirTicket();
     }
-    
+
+    public int registrarDevolucion(LocalDate fechaReal) {
+        if (!activo) {
+            throw new IllegalArgumentException("El préstamo no se encuentra activo");
+        }
+        fechaDevolucionReal = fechaReal;
+        activo = false;
+        libro.devolver();
+        usuario.setPrestamo("0");
+        if (fechaReal.isAfter(fechaDevolucion)) {
+            multa = (int) ChronoUnit.DAYS.between(fechaDevolucion, fechaReal) * 1000;
+        } else {
+            multa = 0;
+        }
+        return multa;
+    }
+
     public void imprimirTicket(){
         System.out.println("-_-_-_-_-_-_-_-_-La Biblioteca-_-_-_-_-_-_-_-_");
         System.out.println("* Cliente: "+usuario.getNombre()+" "+usuario.getApellido()+" Rut: "+usuario.getNumeroRut()+"-"+usuario.getDv());

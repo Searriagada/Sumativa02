@@ -35,8 +35,8 @@ public class Estudiante extends Usuario {
         if(carrera == null || carrera.trim().isEmpty()){
             throw new IllegalArgumentException("Error, debe ingresar una carrera válida");
         }
-        if(!carrera.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")){
-                throw new IllegalArgumentException("Error, el nombre de la carrera de contener letras y espacios");
+        if(!carrera.trim().matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")){
+                throw new IllegalArgumentException("Error, el nombre de la carrera debe contener letras y espacios");
         }
         this.carrera = carrera.toUpperCase();
     }

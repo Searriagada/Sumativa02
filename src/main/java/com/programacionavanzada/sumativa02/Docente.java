@@ -44,8 +44,8 @@ public class Docente extends Usuario {
         if (profesion == null || profesion.trim().isEmpty()){
             throw new IllegalArgumentException("Error, el campo profesión no puede quedar vacío");
         }
-        if(!profesion.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")){
-                throw new IllegalArgumentException("Error, solo puede utilizar letras y espacios");   
+        if(!profesion.trim().matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")){
+                throw new IllegalArgumentException("Error, solo puede utilizar letras y espacios");
         }
         this.profesion = profesion.toUpperCase();
     }
@@ -59,12 +59,14 @@ public class Docente extends Usuario {
             throw new IllegalArgumentException("Error, el campo grado no puede estar vacío");
         }
         
-        if(!grado.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
+        if(!grado.trim().matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
              throw new IllegalArgumentException("Error, no debe usar caracteres especiales y usar espacios");
         }
         
         if(grado.equalsIgnoreCase("Magister") || grado.equalsIgnoreCase("Doctor")) {
              this.grado = grado.toUpperCase();
+        } else {
+            throw new IllegalArgumentException("Error, el grado debe ser Magister o Doctor");
       }
     }
 

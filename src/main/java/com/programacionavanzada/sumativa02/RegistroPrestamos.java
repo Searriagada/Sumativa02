@@ -1,33 +1,48 @@
 package com.programacionavanzada.sumativa02;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
-/**
- *
- * @author 
- */
 public class RegistroPrestamos {
-    
-    private ArrayList<Prestamo> listaPrestamos = new ArrayList<>();
-    /**
-     * Lista con prestamos realizados.
-     * @param prestamo 
-     */
-    public void agregarPrestamo(Prestamo prestamo){
+
+    private final ArrayList<Prestamo> listaPrestamos = new ArrayList<>();
+
+    public Prestamo registrarPrestamo(String isbn, int numeroRut, int diasPrestamo, Biblioteca biblioteca, RegistroUsuarios registroUsuarios) {
+        Prestamo prestamo = new Prestamo(isbn, numeroRut, diasPrestamo, biblioteca, registroUsuarios);
+        prestamo.generarPrestamo();
         listaPrestamos.add(prestamo);
+        return prestamo;
     }
-    /**
-     * Método para buscar un prestamo si libro devuelto corresponda al cliente ingresado
-     * @param isbn del libro a devolver
-     * @return objeto prestamo
-     */
-    public Prestamo buscarPrestamo(String isbn){
-        for(Prestamo i : listaPrestamos){
-            if(i.getUsuario().getPrestamo().equals(isbn)){
-                return i;
+
+    public int registrarDevolucion(int numeroRut, String isbn, LocalDate fechaReal, Biblioteca biblioteca, RegistroUsuarios registroUsuarios) {
+        if (registroUsuarios.buscar(numeroRut) == null) {
+            throw new IllegalArgumentException("El usuario no existe");
+        }
+        if (biblioteca.buscarLibro(isbn) == null) {
+            throw new IllegalArgumentException("El libro no existe");
+        }
+
+        Prestamo prestamo = buscarPrestamoActivoPorUsuario(numeroRut);
+        if (prestamo == null) {
+            throw new IllegalArgumentException("El usuario no tiene préstamo activo");
+        }
+        if (!prestamo.getLibro().getIsbn().equals(isbn)) {
+            throw new IllegalArgumentException("El ISBN no corresponde al libro prestado");
+        }
+        return prestamo.registrarDevolucion(fechaReal);
+    }
+
+    public Prestamo buscarPrestamoActivoPorUsuario(int numeroRut) {
+        for (Prestamo prestamo : listaPrestamos) {
+            if (prestamo.isActivo() && prestamo.getUsuario().getNumeroRut() == numeroRut) {
+                return prestamo;
             }
         }
         return null;
     }
-    
+
+    public List<Prestamo> listarPrestamos() {
+        return new ArrayList<>(listaPrestamos);
+    }
 }

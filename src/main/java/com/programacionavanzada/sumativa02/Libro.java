@@ -25,7 +25,7 @@ public class Libro {
     }
 
     //GETTER
-    
+
     public String getIsbn() {
         return isbn;
     }
@@ -49,9 +49,9 @@ public class Libro {
     public String getUrlImagen() {
         return urlImagen;
     }
-    
+
     //SETTER
-    
+
     public void setIsbn(String isbn) {
         if(isbn == null || isbn.isBlank()){
             throw new IllegalArgumentException("El isbn no puede ser nulo y debe contener texto");
@@ -94,18 +94,4 @@ public class Libro {
             this.urlImagen = urlImagen;
         }
     }
-    
-    public void actualizarStockDisponible(){
-        this.stockDisponible --;
-    }
-    
-    public void devolverStockDisponible(){
-        this.stockDisponible ++;
-    }
-
-    @Override
-    public String toString() {
-        return "Libro{" + "isbn=" + isbn + ", titulo=" + titulo + ", autor=" + autor + ", stockBiblioteca=" + stockBiblioteca + ", stockDisponible=" + stockDisponible + ", urlImagen=" + urlImagen + '}';
-    }
-    
 }
