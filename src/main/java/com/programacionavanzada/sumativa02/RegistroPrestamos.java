@@ -9,11 +9,18 @@ import java.util.ArrayList;
 public class RegistroPrestamos {
     
     private ArrayList<Prestamo> listaPrestamos = new ArrayList<>();
-    
+    /**
+     * Lista con prestamos realizados.
+     * @param prestamo 
+     */
     public void agregarPrestamo(Prestamo prestamo){
         listaPrestamos.add(prestamo);
     }
-    
+    /**
+     * Método para buscar un prestamo si libro devuelto corresponda al cliente ingresado
+     * @param isbn del libro a devolver
+     * @return objeto prestamo
+     */
     public Prestamo buscarPrestamo(String isbn){
         for(Prestamo i : listaPrestamos){
             if(i.getUsuario().getPrestamo().equals(isbn)){

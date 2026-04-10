@@ -43,14 +43,21 @@ public class Devolucion {
     public void setFechaEntrega(LocalDate fechaDevolucion) {
         this.fechaEntrega = fechaDevolucion;
     }
-    
+    /**
+     * Método para generar devolución:
+     * Valida que el usuario tenga asignado el libro a devolver o arroja una excepcion
+     * EL usuario queda habilitado para solicitar nuevos libros
+     * El stock del libro disponible aumenta en 1
+     * Se calcula la multa si procede
+     *  
+     */
     public void generarDevolucion(){
         Prestamo prestamo = registroPrestamos.buscarPrestamo(libro.getIsbn());
         if(prestamo == null){
             throw new IllegalArgumentException("El libro no corresponde al usuario");
         }
         usuario.setPrestamo("0");
-        libro.setStockBiblioteca(libro.getStockBiblioteca()+1);
+        libro.devolverStockDisponible();
         int multa = calcularMulta(prestamo);
         
         if(multa > 0){
@@ -59,7 +66,11 @@ public class Devolucion {
             System.out.println("Devolución dentro del plazo.");
         }
     }
-    
+    /**
+     * Método para calcular la multa, si la fecha del registro supera a la fecha de devolución se aplica una multa de $1.000 por día
+     * @param prestamo objeto prestamo
+     * @return valor total de la multa
+     */
     public int calcularMulta(Prestamo prestamo){
         LocalDate fechaDevolucion = prestamo.getFechaDevolucion();
         

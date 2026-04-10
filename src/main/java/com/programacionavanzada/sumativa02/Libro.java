@@ -24,6 +24,8 @@ public class Libro {
         setUrlImagen(urlImagen);
     }
 
+    //GETTER
+    
     public String getIsbn() {
         return isbn;
     }
@@ -47,7 +49,9 @@ public class Libro {
     public String getUrlImagen() {
         return urlImagen;
     }
-
+    
+    //SETTER
+    
     public void setIsbn(String isbn) {
         if(isbn == null || isbn.isBlank()){
             throw new IllegalArgumentException("El isbn no puede ser nulo y debe contener texto");
@@ -89,5 +93,13 @@ public class Libro {
         }else{
             this.urlImagen = urlImagen;
         }
+    }
+    
+    public void actualizarStockDisponible(){
+        this.stockDisponible --;
+    }
+    
+    public void devolverStockDisponible(){
+        this.stockDisponible ++;
     }
 }

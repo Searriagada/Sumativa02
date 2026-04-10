@@ -20,6 +20,11 @@ public class Biblioteca {
         listaLibros.add(libro);
         return true;
     }
+    /**
+     * Método para buscar libro por su isbn
+     * @param isbn
+     * @return objeto libro
+     */
     
     public Libro buscarLibro(String isbn){
         for(Libro i : listaLibros){

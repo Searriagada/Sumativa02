@@ -89,8 +89,16 @@ public class Prestamo {
         this.diasPrestamo = diasPrestamo;
     }
     
+    /**
+     * Método para generar préstamo
+     * Actualiza el stock disponible en Biblioteca
+     * Añade el libro en préstamo al usuario
+     * Agrega el préstamo al ArrayList
+     * genera ticket de préstamo
+     * @param registro 
+     */
     public void generarPrestamo(RegistroPrestamos registro){
-        libro.setStockBiblioteca(libro.getStockBiblioteca()-1);
+        libro.actualizarStockDisponible();
         usuario.setPrestamo(libro.getIsbn());
         registro.agregarPrestamo(this);
         imprimirTicket();
