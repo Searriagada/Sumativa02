@@ -90,4 +90,18 @@ public class Libro {
             this.urlImagen = urlImagen;
         }
     }
+
+    public void prestar() {
+        if (stockDisponible <= 0) {
+            throw new IllegalArgumentException("Sin stock disponible");
+        }
+        stockDisponible--;
+    }
+
+    public void devolver() {
+        if (stockDisponible >= stockBiblioteca) {
+            throw new IllegalArgumentException("No es posible devolver más ejemplares que el stock de biblioteca");
+        }
+        stockDisponible++;
+    }
 }

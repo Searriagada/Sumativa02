@@ -1,6 +1,8 @@
 
 package com.programacionavanzada.sumativa02;
 
+import java.util.Objects;
+
 public class Usuario {
     protected String nombre;
     protected String apellido;
@@ -69,7 +71,7 @@ public class Usuario {
         if(apellido == null || apellido.trim().isEmpty()) {
             throw new IllegalArgumentException("Debe ingresar un apellido");
         }
-        if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
+        if (!apellido.trim().matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
              throw new IllegalArgumentException("El apellido solo puede contener letras");
              
         }
@@ -95,25 +97,25 @@ public class Usuario {
 
     // Validación de género
     public void setGenero(String genero) {
-        if(genero.equalsIgnoreCase("F") || genero.equalsIgnoreCase("M")) {
+        if(genero != null && (genero.equalsIgnoreCase("F") || genero.equalsIgnoreCase("M"))) {
             this.genero = genero;
         }
         else {
-            System.out.println("Error: Debe declarar el genero como F para femenino y M para masculino");
+            throw new IllegalArgumentException("Debe declarar el genero como F para femenino y M para masculino");
         }
     }
 
     // FALTA VALIDAR EL PRESTAMO. 
     public void setPrestamo(String prestamo) {
         if(prestamo == null || prestamo.trim().isEmpty()){
-            System.out.println("Error, la condición de prestamo no puede estar vacía");
+            throw new IllegalArgumentException("La condición de prestamo no puede estar vacía");
         }
         else{
-            if(prestamo.equals("0") || prestamo.matches("[0-9\\-]+")){
+            if(prestamo.equals("0") || prestamo.matches("[A-Za-z0-9\\-]+")){
                 this.prestamo = prestamo;
             }
             else{
-                System.out.println("Debe ingresar 0 o un ISBN válido");
+                throw new IllegalArgumentException("Debe ingresar 0 o un ISBN válido");
             }
         }
     }
@@ -122,7 +124,21 @@ public class Usuario {
     public String toString() {
         return "Usuario{" + "nombre=" + nombre + ", apellido=" + apellido + ", numeroRut=" + numeroRut + ", dv=" + dv + ", genero=" + genero + ", prestamo=" + prestamo + '}';
     }
-    
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Usuario other)) {
+            return false;
+        }
+        return numeroRut == other.numeroRut;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numeroRut);
+    }
 
 }

@@ -2,6 +2,7 @@
 package com.programacionavanzada.sumativa02;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RegistroUsuarios {
     private ArrayList<Usuario> listaUsuarios; 
@@ -32,13 +33,15 @@ public class RegistroUsuarios {
      * si el usuario no existe lo agrega a la lista
      * @param usuario que será agregado a la lista
      */
-    public void agregar (Usuario usuario) {
+    public boolean agregar (Usuario usuario) {
             if (buscar(usuario.getNumeroRut()) != null) {
                 System.out.println("Usuario ya registrado");
+                return false;
             }
             else{
                 listaUsuarios.add(usuario); 
                 System.out.println("Usuario ingresado correctamente");
+                return true;
             }
         }
 
@@ -63,6 +66,10 @@ public class RegistroUsuarios {
             }
         }
         return false; 
+    }
+
+    public List<Usuario> listar() {
+        return new ArrayList<>(listaUsuarios);
     }
     
 }

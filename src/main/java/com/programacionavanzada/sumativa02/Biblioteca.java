@@ -1,5 +1,6 @@
 package com.programacionavanzada.sumativa02;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Biblioteca {
     
@@ -44,5 +45,9 @@ public class Biblioteca {
         }
         System.out.println("El isbn no existe");
         return false;
+    }
+
+    public List<Libro> listarLibros() {
+        return new ArrayList<>(listaLibros);
     }
 }
