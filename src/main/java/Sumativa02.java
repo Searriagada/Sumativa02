@@ -1,5 +1,4 @@
-
-package com.programacionavanzada.sumativa02;
+import com.programacionavanzada.sumativa02.*;
 
 public class Sumativa02 {
 

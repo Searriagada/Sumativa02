@@ -11,7 +11,7 @@
         <maven.compiler.source>25</maven.compiler.source>
         <maven.compiler.target>25</maven.compiler.target>
         <junit.version>5.12.2</junit.version>
-        <exec.mainClass>com.programacionavanzada.sumativa02.Sumativa02</exec.mainClass>
+        <exec.mainClass>Sumativa02</exec.mainClass>
     </properties>
     <dependencies>
         <dependency>
