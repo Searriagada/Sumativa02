@@ -16,7 +16,7 @@ public class RegistroPrestamos {
     
     public Prestamo buscarPrestamo(String isbn){
         for(Prestamo i : listaPrestamos){
-            if(i.getUsuario().isPrestamo().equals(isbn)){
+            if(i.getUsuario().getPrestamo().equals(isbn)){
                 return i;
             }
         }

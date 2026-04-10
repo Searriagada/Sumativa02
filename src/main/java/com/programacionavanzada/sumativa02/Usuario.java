@@ -43,7 +43,7 @@ public class Usuario {
         return genero;
     }
 
-    public String Prestamo() {
+    public String getPrestamo() {
         return prestamo;
     }
     

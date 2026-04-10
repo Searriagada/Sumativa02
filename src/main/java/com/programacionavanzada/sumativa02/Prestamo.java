@@ -67,10 +67,10 @@ public class Prestamo {
     }
 
     public void setUsuario(Usuario usuario) {
-        if(usuario.Prestamo().equals("0")){
+        if(usuario.getPrestamo().equals("0")){
             this.usuario = usuario;
         }else{
-           throw new IllegalArgumentException("El usuario cuenta con el siguiente prestamo activo: "+usuario.Prestamo());
+           throw new IllegalArgumentException("El usuario cuenta con el siguiente prestamo activo: "+usuario.getPrestamo());
         }
     }
 
