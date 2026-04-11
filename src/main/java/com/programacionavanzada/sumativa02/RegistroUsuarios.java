@@ -62,7 +62,8 @@ public class RegistroUsuarios {
                 return true;
             }
         }
-        return false; 
+        throw new IllegalArgumentException("El usuario no esta registrado");
+        
     }
     
 }

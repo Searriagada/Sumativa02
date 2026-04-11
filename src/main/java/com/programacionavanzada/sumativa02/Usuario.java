@@ -12,13 +12,13 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, int numeroRut, char dv, String genero, String prestamo) {
+    public Usuario(String nombre, String apellido, int numeroRut, char dv, String genero) {
         this.setNombre(nombre);
         this.setApellido(apellido); 
         this.setNumeroRut(numeroRut);
         this.setDv(dv);
         this.setGenero(genero);
-        this.setPrestamo(prestamo);
+        this.prestamo = "0";
     }
 
     // GETTER
@@ -90,6 +90,9 @@ public class Usuario {
         if (!Character.isDigit(dv) && dv != 'K') {
             throw new IllegalArgumentException("El dígito verificador debe ser un número o letra K.");
         } 
+        if(!calcularDV(numeroRut).equals(String.valueOf(dv))){
+            throw new IllegalArgumentException("El DV ingresado no corresponde a Rut ");
+        }
         this.dv = dv;
     }
 
@@ -99,23 +102,46 @@ public class Usuario {
             this.genero = genero;
         }
         else {
-            System.out.println("Error: Debe declarar el genero como F para femenino y M para masculino");
+            throw new IllegalArgumentException("Error: Debe declarar el genero como F para femenino y M para masculino");
         }
     }
 
     // FALTA VALIDAR EL PRESTAMO. 
     public void setPrestamo(String prestamo) {
         if(prestamo == null || prestamo.trim().isEmpty()){
-            System.out.println("Error, la condición de prestamo no puede estar vacía");
+            throw new IllegalArgumentException("Error, la condición de prestamo no puede estar vacía");
         }
         else{
             if(prestamo.equals("0") || prestamo.matches("[0-9\\-]+")){
                 this.prestamo = prestamo;
             }
             else{
-                System.out.println("Debe ingresar 0 o un ISBN válido");
+                throw new IllegalArgumentException("Debe ingresar 0 o un ISBN válido");
             }
         }
+    }
+    
+    
+    /** 
+     * 
+     * @param rut
+     * @return 
+     */
+    private String calcularDV(int rut) {
+        int suma = 0;
+        int multiplicador = 2;
+
+        while (rut > 0) {
+            suma += (rut % 10) * multiplicador;
+            rut /= 10;
+            multiplicador = (multiplicador == 7) ? 2 : multiplicador + 1;
+        }
+
+        int resto = 11 - (suma % 11);
+
+        if (resto == 11) return "0";
+        if (resto == 10) return "K";
+        return String.valueOf(resto);
     }
 
     @Override

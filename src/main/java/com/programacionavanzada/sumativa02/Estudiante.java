@@ -12,9 +12,9 @@ public class Estudiante extends Usuario {
         this.setCarrera(carrera);
     }
 
-    public Estudiante(String carrera, String nombre, String apellido, int numeroRut, char dv, String genero, String prestamo) {
-        super(nombre, apellido, numeroRut, dv, genero, prestamo);
-        this.carrera = carrera;
+    public Estudiante(String carrera, String nombre, String apellido, int numeroRut, char dv, String genero) {
+        super(nombre, apellido, numeroRut, dv, genero);
+        this.setCarrera(carrera);
     }
     
     
@@ -35,7 +35,7 @@ public class Estudiante extends Usuario {
         if(carrera == null || carrera.trim().isEmpty()){
             throw new IllegalArgumentException("Error, debe ingresar una carrera válida");
         }
-        if(carrera.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")){
+        if(!carrera.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")){
                 throw new IllegalArgumentException("Error, el nombre de la carrera de contener letras y espacios");
         }
         this.carrera = carrera.toUpperCase();

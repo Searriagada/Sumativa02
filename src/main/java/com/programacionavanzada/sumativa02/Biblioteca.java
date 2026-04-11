@@ -3,7 +3,11 @@ import java.util.ArrayList;
 
 public class Biblioteca {
     
-    private ArrayList<Libro> listaLibros = new ArrayList<>();
+    private ArrayList<Libro> listaLibros;
+
+    public Biblioteca() {
+        this.listaLibros = new ArrayList<>();
+    }
     
     /**
      * método para agregar libros, si el isbn ya existe no se agrega a lista
@@ -13,7 +17,7 @@ public class Biblioteca {
     public boolean agregarLibro(Libro libro){
         for(Libro i : listaLibros){
             if(i.getIsbn().equals(libro.getIsbn())){
-                System.out.println("El isbn ya existe");
+                System.out.println("El isbn " + i.getIsbn() + " ya existe");
                 return false;
             }
         }
@@ -34,6 +38,12 @@ public class Biblioteca {
         }
         return null;
     } 
+    
+        public void mostrar (){
+        for (Libro i : listaLibros) {
+            System.out.println(i);
+        }
+    }
 
     /**
      * método para eliminar un libro, valida que el isbn exista antes de eliminar el objeto
@@ -50,4 +60,13 @@ public class Biblioteca {
         System.out.println("El isbn no existe");
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "Biblioteca{" + "listaLibros=" + listaLibros + '}';
+    }
+    
+    
 }
+
+

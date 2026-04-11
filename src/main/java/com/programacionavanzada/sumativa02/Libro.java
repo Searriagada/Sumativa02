@@ -102,4 +102,10 @@ public class Libro {
     public void devolverStockDisponible(){
         this.stockDisponible ++;
     }
+
+    @Override
+    public String toString() {
+        return "Libro{" + "isbn=" + isbn + ", titulo=" + titulo + ", autor=" + autor + ", stockBiblioteca=" + stockBiblioteca + ", stockDisponible=" + stockDisponible + ", urlImagen=" + urlImagen + '}';
+    }
+    
 }
