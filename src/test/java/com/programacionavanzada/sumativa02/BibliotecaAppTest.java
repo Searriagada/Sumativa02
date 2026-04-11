@@ -34,13 +34,13 @@ class BibliotecaAppTest {
     @Test
     void intentarCrearUsuarioConGeneroInvalido() {
         assertThrows(IllegalArgumentException.class, () ->
-                new Estudiante("Ingenieria", "Juan", "Perez", 14444444, '5', "X", "0"));
+                new Estudiante("Ingenieria", "Juan", "Perez", 14444444, '2', "X"));
     }
 
     @Test
     void intentarCrearUsuarioConRunInvalido() {
         assertThrows(IllegalArgumentException.class, () ->
-                new Docente("Profesor", "Doctor", "Ana", "Lopez", 12345, 'K', "F", "0"));
+                new Docente("Profesor", "Doctor", "Ana", "Lopez", 12345, 'K', "F"));
     }
 
     @Test
@@ -110,7 +110,7 @@ class BibliotecaAppTest {
         Prestamo prestamo = prestamos.registrarPrestamo("ISBN-005", 17777777, 7, biblioteca, usuarios);
 
         assertNotNull(prestamo);
-        assertEquals("ISBN-005", estudiante.Prestamo());
+        assertEquals("ISBN-005", estudiante.getPrestamo());
         assertEquals(1, libro.getStockDisponible());
     }
 
@@ -127,7 +127,7 @@ class BibliotecaAppTest {
         Prestamo prestamo = prestamos.registrarPrestamo("ISBN-006", 18888888, 15, biblioteca, usuarios);
 
         assertNotNull(prestamo);
-        assertEquals("ISBN-006", docente.Prestamo());
+        assertEquals("ISBN-006", docente.getPrestamo());
         assertEquals(1, libro.getStockDisponible());
     }
 
@@ -207,7 +207,7 @@ class BibliotecaAppTest {
         int multa = prestamos.registrarDevolucion(26666666, "ISBN-013", prestamo.getFechaDevolucion(), biblioteca, usuarios);
 
         assertEquals(0, multa);
-        assertEquals("0", estudiante.Prestamo());
+        assertEquals("0", estudiante.getPrestamo());
         assertEquals(2, libro.getStockDisponible());
     }
 
@@ -327,14 +327,34 @@ class BibliotecaAppTest {
     }
 
     private Estudiante crearEstudiante(int rut) {
-        return new Estudiante("Ingenieria", "Juan", "Perez", rut, '5', "M", "0");
+        return new Estudiante("Ingenieria", "Juan", "Perez", rut, calcularDv(rut), "M");
     }
 
     private Docente crearDocente(int rut) {
-        return new Docente("Profesor", "Doctor", "Ana", "Lopez", rut, 'K', "F", "0");
+        return new Docente("Profesor", "Doctor", "Ana", "Lopez", rut, calcularDv(rut), "F");
     }
 
     private Libro crearLibro(String isbn, int stock) {
         return new Libro(isbn, "Libro " + isbn, "Autor " + isbn, stock, stock, "");
+    }
+
+    private char calcularDv(int rut) {
+        int suma = 0;
+        int multiplicador = 2;
+
+        while (rut > 0) {
+            suma += (rut % 10) * multiplicador;
+            rut /= 10;
+            multiplicador = (multiplicador == 7) ? 2 : multiplicador + 1;
+        }
+
+        int resto = 11 - (suma % 11);
+        if (resto == 11) {
+            return '0';
+        }
+        if (resto == 10) {
+            return 'K';
+        }
+        return Character.forDigit(resto, 10);
     }
 }

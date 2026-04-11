@@ -52,13 +52,14 @@ public class Devolucion {
      *  
      */
     public void generarDevolucion(){
-        Prestamo prestamo = registroPrestamos.buscarPrestamo(libro.getIsbn());
+        Prestamo prestamo = registroPrestamos.buscarPrestamoActivoPorUsuario(usuario.getNumeroRut());
         if(prestamo == null){
-            throw new IllegalArgumentException("El libro no corresponde al usuario");
+            throw new IllegalArgumentException("El usuario no tiene préstamo activo");
         }
-        usuario.setPrestamo("0");
-        libro.devolverStockDisponible();
-        int multa = calcularMulta(prestamo);
+        if(!prestamo.getLibro().getIsbn().equals(libro.getIsbn())){
+            throw new IllegalArgumentException("El ISBN no corresponde al libro prestado");
+        }
+        int multa = prestamo.registrarDevolucion(fechaEntrega);
         
         if(multa > 0){
             System.out.println("Retraso con multa por $"+multa);

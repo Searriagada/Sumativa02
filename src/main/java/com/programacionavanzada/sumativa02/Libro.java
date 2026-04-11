@@ -94,4 +94,34 @@ public class Libro {
             this.urlImagen = urlImagen;
         }
     }
+
+    public void actualizarStockDisponible() {
+        if (stockDisponible <= 0) {
+            throw new IllegalArgumentException("Sin stock disponible");
+        }
+        stockDisponible--;
+    }
+
+    public void devolver() {
+        if (stockDisponible >= stockBiblioteca) {
+            throw new IllegalArgumentException("No es posible aumentar el stock por sobre el total de biblioteca");
+        }
+        stockDisponible++;
+    }
+
+    public void registrarDevolucion() {
+        devolver();
+    }
+
+    @Override
+    public String toString() {
+        return "Libro{" +
+                "isbn='" + isbn + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", autor='" + autor + '\'' +
+                ", stockBiblioteca=" + stockBiblioteca +
+                ", stockDisponible=" + stockDisponible +
+                ", urlImagen='" + urlImagen + '\'' +
+                '}';
+    }
 }

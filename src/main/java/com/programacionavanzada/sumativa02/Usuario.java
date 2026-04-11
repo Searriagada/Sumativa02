@@ -14,13 +14,13 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, int numeroRut, char dv, String genero, String prestamo) {
+    public Usuario(String nombre, String apellido, int numeroRut, char dv, String genero) {
         this.setNombre(nombre);
         this.setApellido(apellido); 
         this.setNumeroRut(numeroRut);
         this.setDv(dv);
         this.setGenero(genero);
-        this.setPrestamo(prestamo);
+        this.prestamo = "0";
     }
 
     // GETTER

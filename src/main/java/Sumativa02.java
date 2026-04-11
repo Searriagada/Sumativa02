@@ -32,8 +32,7 @@ public class Sumativa02 {
                 "Perez",
                 12345678,
                 '5',
-                "M",
-                "0"
+                "M"
         );
         Usuario docente = new Docente(
                 "Ingeniero Civil Informatico",
@@ -41,9 +40,8 @@ public class Sumativa02 {
                 "Ana",
                 "Gonzalez",
                 23456789,
-                'K',
-                "F",
-                "0"
+                '6',
+                "F"
         );
 
         registroUsuarios.agregar(estudiante);
@@ -67,7 +65,7 @@ public class Sumativa02 {
         );
         prestamo.generarPrestamo();
 
-        System.out.println("\nEstado del usuario despues del prestamo: " + estudiante.Prestamo());
+        System.out.println("\nEstado del usuario despues del prestamo: " + estudiante.getPrestamo());
         System.out.println("Stock en biblioteca despues del prestamo: " + libro1.getStockBiblioteca());
     }
 }

@@ -100,6 +100,9 @@ public class Prestamo {
     }
 
     public void setDiasPrestamo(int diasPrestamo) {
+        if (diasPrestamo <= 0) {
+            throw new IllegalArgumentException("Los días de préstamo deben ser mayores a 0");
+        }
         if(usuario.getMaxDiasPrestamo()<diasPrestamo){
             throw new IllegalArgumentException("EL usuario supera el límite de días permitido");
         }
@@ -118,6 +121,12 @@ public class Prestamo {
         libro.actualizarStockDisponible();
         usuario.setPrestamo(libro.getIsbn());
         registro.agregarPrestamo(this);
+        imprimirTicket();
+    }
+
+    public void generarPrestamo() {
+        libro.actualizarStockDisponible();
+        usuario.setPrestamo(libro.getIsbn());
         imprimirTicket();
     }
 
