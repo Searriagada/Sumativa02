@@ -72,9 +72,5 @@ public class RegistroUsuarios {
     public List<Usuario> listar() {
         return new ArrayList<>(listaUsuarios);
     }
-
-    public List<Usuario> listar() {
-        return new ArrayList<>(listaUsuarios);
-    }
     
 }
