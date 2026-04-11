@@ -108,7 +108,11 @@ public class Usuario {
         }
     }
 
-    // FALTA VALIDAR EL PRESTAMO. 
+
+    /**
+     *  Valida que el prestamo no este vacio o sea nulo
+     * @param prestamo 
+     */
     public void setPrestamo(String prestamo) {
         if(prestamo == null || prestamo.trim().isEmpty()){
             throw new IllegalArgumentException("La condición de prestamo no puede estar vacía");
@@ -125,9 +129,9 @@ public class Usuario {
 
 
     /**
-     *
-     * @param rut
-     * @return
+     * Esta funcion verifica que el Digito verificador sea valido. 
+     * @param rut trae el numero del rut previo al div sin puntos. 
+     * @return entrega el dv en String  una vez que ya se ha verificado que es correcto. 
      */
     private String calcularDV(int rut) {
         int suma = 0;
