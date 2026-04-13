@@ -5,6 +5,7 @@ public class Sumativa02 {
     public static void main(String[] args) {
         Biblioteca biblioteca = new Biblioteca();
         RegistroUsuarios registroUsuarios = new RegistroUsuarios();
+        RegistroPrestamos registroPrestamos = new RegistroPrestamos();
 
         Libro libro1 = new Libro(
                 "978-956-123456-7",
@@ -12,7 +13,7 @@ public class Sumativa02 {
                 "Robert C. Martin",
                 5,
                 5,
-                "https://example.com/clean-code.jpg"
+                ""
         );
         Libro libro2 = new Libro(
                 "978-84-376-0494-7",
@@ -56,16 +57,19 @@ public class Sumativa02 {
         registroUsuarios.mostrar();
 
         System.out.println("\n=== PRESTAMO DE PRUEBA ===");
-        Prestamo prestamo = new Prestamo(
+        Prestamo prestamo = registroPrestamos.registrarPrestamo(
                 libro1.getIsbn(),
                 estudiante.getNumeroRut(),
                 7,
                 biblioteca,
                 registroUsuarios
         );
-        prestamo.generarPrestamo();
 
         System.out.println("\nEstado del usuario despues del prestamo: " + estudiante.getPrestamo());
-        System.out.println("Stock en biblioteca despues del prestamo: " + libro1.getStockBiblioteca());
+        System.out.println("Stock disponible despues del prestamo: " + libro1.getStockDisponible());
+
+        // inicia menu consola
+        new Menu(biblioteca, registroUsuarios, registroPrestamos).iniciar();
+
     }
 }
